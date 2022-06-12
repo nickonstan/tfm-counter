@@ -115,7 +115,7 @@ class Player(tk.Frame):
         self.calculate_sum()
 
         # Binds
-        self.name_lbl.bind("<Button-1>", lambda event: self.change_player_color())
+        self.name_lbl.bind("<Button-1>", lambda event: self.edit_player())
 
     def calculate_sum(self):
         total = 0
@@ -126,7 +126,7 @@ class Player(tk.Frame):
                 total += 0
         self.sum_var.set(total)
 
-    def change_player_color(self):
+    def edit_player(self):
         if not PlayerEdit.editor_on:
             PlayerEdit(self)
             PlayerEdit.editor_on = True
@@ -187,6 +187,7 @@ class PlayerEdit(tk.Toplevel):
             x += (size + padding)
 
     def change_player_name(self, player):
+        player.name = self.pl_name.get()
         player.name_var.set(self.pl_name.get())
 
     def change_player_color(self, player):

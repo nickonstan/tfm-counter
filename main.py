@@ -124,7 +124,7 @@ if __name__ == '__main__':
     root = tk.Tk()
     root.title("TFM Counter")
     root.minsize(163, 480)
-    root.resizable(0, 0)
+    root.resizable(False, False)
     app = Gui(root)
     app.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
     root.mainloop()
