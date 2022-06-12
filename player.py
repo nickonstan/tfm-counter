@@ -50,8 +50,8 @@ class Player(tk.Frame):
         self.mls_lbl = tk.Label(self, text='Milestones', image=self.milestones_sbl)
         self.mls_spn = tk.Spinbox(self, textvariable=self.mls_var, from_=0, to=15, increment=5, justify=tk.CENTER)
         self.awd_lbl = tk.Label(self, text='Awards', image=self.awards_sbl)
-        self.awd_chk = tk.Spinbox(self, textvariable=self.awd_var, values=(0, 2, 4, 5, 6, 7, 9, 10, 12, 15),
-                                  justify=tk.CENTER)
+        self.awd_chk = tk.Spinbox(self, textvariable=self.awd_var,
+                                  values=('0', '2', '4', '5', '6', '7', '9', '10', '12', '15'), justify=tk.CENTER)
         self.vp_lbl = tk.Label(self, text='VP', image=self.vp_sbl)
         self.vp_spn = tk.Spinbox(self, textvariable=self.vp_var, from_=-20, to=120, increment=1, justify=tk.CENTER)
         self.green_lbl = tk.Label(self, text='Greeneries', image=self.greenery_sbl)

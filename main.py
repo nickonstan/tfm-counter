@@ -8,10 +8,8 @@ class Gui(tk.Frame):
 
     # Class variables
 
-    def __init__(self, master=None):
+    def __init__(self, master):
         tk.Frame.__init__(self, master)
-        self.master = master
-        self.master.title("TFM Counter")
 
         # Attributes
         self.player_num = 0
@@ -55,9 +53,15 @@ class Gui(tk.Frame):
 
         # Binds/Hotkeys
         self.master.bind('<Control-p>', lambda e: self.add_player())  # Assigns "Ctrl+p" to "Add Player".
+        self.master.bind('<Control-P>', lambda e: self.add_player())  # Assigns "Ctrl+P" to "Add Player".
         self.master.bind('<Control-r>', lambda e: self.remove_player())  # Assigns "Ctrl+r" to "Remove Player".
+        self.master.bind('<Control-R>', lambda e: self.remove_player())  # Assigns "Ctrl+r" to "Remove Player".
         self.master.bind('<Control-q>', lambda e: self.clear_scores())  # Assigns "Ctrl+q" to "Clear Scores".
+        self.master.bind('<Control-Q>', lambda e: self.clear_scores())  # Assigns "Ctrl+Q" to "Clear Scores".
         self.master.bind('<Control-t>', lambda e: self.change_player_focus())
+
+        # Add the first player automatically when the window is created.
+        self.add_player()
 
     def add_player(self):
         if self.player_num < 5:
@@ -99,7 +103,6 @@ class Gui(tk.Frame):
 
     def show_about(self):
         print("Not implemented yet!")
-        pass
 
     def change_player_focus(self):
         current_focus = self.focus_get()
@@ -119,6 +122,9 @@ class Gui(tk.Frame):
 
 if __name__ == '__main__':
     root = tk.Tk()
+    root.title("TFM Counter")
+    root.minsize(163, 480)
+    root.resizable(0, 0)
     app = Gui(root)
     app.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
     root.mainloop()
