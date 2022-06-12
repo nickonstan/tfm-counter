@@ -149,24 +149,26 @@ class Player(tk.Frame):
 
 
 class PlayerEdit(tk.Toplevel):
-
     editor_on = False
 
     def __init__(self, player):
         tk.Toplevel.__init__(self)
+        self.protocol('WM_DELETE_WINDOW', self.set_editor_off)
+
         self.title('Edit Player')
         self.player = player
         self.player_name = tk.StringVar(value=player.name)
 
         self.picker_size = 32
+        self.padding_size = 3
 
         self.pl_name_lbl = tk.Label(self, text='Player Name')
         self.pl_name = tk.Entry(self, textvariable=self.player_name)
         self.pl_color_lbl = tk.Label(self, text='Player Color')
-        self.pl_color_canvas = tk.Canvas(self, width=self.picker_size * 5, height=self.picker_size)
+        self.pl_color_canvas = tk.Canvas(self, width=self.picker_size * 5 + self.padding_size * 4,
+                                         height=self.picker_size, relief=tk.GROOVE)
 
-        self.color_choices = []
-        self.create_color_picker(self.picker_size)
+        self.create_color_picker(self.picker_size, self.padding_size)
 
         # Geometry Management
         self.pl_name_lbl.grid(row=0, column=0, sticky=tk.W)
@@ -176,12 +178,24 @@ class PlayerEdit(tk.Toplevel):
 
         # Binds
         self.bind('<Return>', lambda e: self.change_player_name(self.player))
+        self.bind('<ButtonPress-1>', lambda e: self.change_player_color(self.player))
 
-    def create_color_picker(self, size):
+    def create_color_picker(self, size, padding):
         x = 0
         for i in range(5):
             self.pl_color_canvas.create_rectangle(x, 0, x + size, size, width=0, fill=settings.player_colors[i])
-            x += size
+            x += (size + padding)
 
     def change_player_name(self, player):
         player.name_var.set(self.pl_name.get())
+
+    def change_player_color(self, player):
+        """ Changes the player color when clicking on one of the color tiles."""
+        color_tile = self.pl_color_canvas.find_withtag('current')
+        if color_tile:
+            player.name_lbl.configure(fg=self.pl_color_canvas.itemcget(color_tile, 'fill'))
+
+    def set_editor_off(self):
+        """ Sets the editor as "off" and destroys the window."""
+        PlayerEdit.editor_on = False
+        self.destroy()
