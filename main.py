@@ -58,7 +58,8 @@ class Gui(tk.Frame):
         self.master.bind('<Control-R>', lambda e: self.remove_player())  # Assigns "Ctrl+r" to "Remove Player".
         self.master.bind('<Control-q>', lambda e: self.clear_scores())  # Assigns "Ctrl+q" to "Clear Scores".
         self.master.bind('<Control-Q>', lambda e: self.clear_scores())  # Assigns "Ctrl+Q" to "Clear Scores".
-        self.master.bind('<Control-t>', lambda e: self.change_player_focus())
+        self.master.bind('<Right>', lambda e: self.focus_right())
+        self.master.bind('<Left>', lambda e: self.focus_left())
 
         # Add the first player automatically when the window is created.
         self.add_player()
@@ -104,16 +105,29 @@ class Gui(tk.Frame):
     def show_about(self):
         print("Not implemented yet!")
 
-    def change_player_focus(self):
+    def focus_right(self):
         current_focus = self.focus_get()
-        print(current_focus.grid_info()['row'])  # Returns the row of the current widget.
         focus_parent = str(current_focus.master)
-        focus_index = int(focus_parent.split("Player ")[1])
-        if focus_index == self.player_num:
-            focus_index_right = 0
+        player_index = int(focus_parent.split("Player ")[1]) - 1
+        target_widget = str(current_focus).split('.')[3]
+        if player_index == len(self.players) - 1:
+            target_index = 0
+            self.players[target_index].children[f'{target_widget}'].focus_set()
         else:
-            focus_index_right = focus_index
-        self.players[focus_index_right].focus_set()
+            target_index = player_index + 1
+            self.players[target_index].children[f'{target_widget}'].focus_set()
+
+    def focus_left(self):
+        current_focus = self.focus_get()
+        focus_parent = str(current_focus.master)
+        player_index = int(focus_parent.split("Player ")[1]) - 1
+        target_widget = str(current_focus).split('.')[3]
+        if player_index == 0:
+            target_index = len(self.players) - 1
+            self.players[target_index].children[f'{target_widget}'].focus_set()
+        else:
+            target_index = player_index - 1
+            self.players[target_index].children[f'{target_widget}'].focus_set()
 
     def quit(self):
         # Terminate the software

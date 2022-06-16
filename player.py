@@ -117,7 +117,7 @@ class Player(tk.Frame):
         # Binds
         self.name_lbl.bind("<Button-1>", lambda event: self.edit_player())
 
-    def calculate_sum(self):
+    def calculate_sum(self, *args):
         total = 0
         for widget in self.spinboxes:
             try:
