@@ -1,4 +1,4 @@
-from tkinter.messagebox import askyesno, showerror
+from tkinter.messagebox import askyesno, showerror, showinfo
 from player import Player
 import tkinter as tk
 import sys
@@ -24,8 +24,8 @@ class Gui(tk.Frame):
         self.fl_menubutton.grid(row=0, column=0)
 
         self.fl_menu = tk.Menu(self.fl_menubutton, tearoff=0)
-        self.fl_menu.add_command(label="Save")
-        self.fl_menu.add_command(label="Save As...")
+        # self.fl_menu.add_command(label="Save")
+        # self.fl_menu.add_command(label="Save As...")
         self.fl_menu.add_command(label="Quit", command=self.quit)
 
         # Player Menu
@@ -52,14 +52,14 @@ class Gui(tk.Frame):
         # Geometry Management
 
         # Binds/Hotkeys
-        self.master.bind('<Control-p>', lambda e: self.add_player())  # Assigns "Ctrl+p" to "Add Player".
-        self.master.bind('<Control-P>', lambda e: self.add_player())  # Assigns "Ctrl+P" to "Add Player".
+        self.master.bind('<Control-a>', lambda e: self.add_player())  # Assigns "Ctrl+a" to "Add Player".
+        self.master.bind('<Control-A>', lambda e: self.add_player())  # Assigns "Ctrl+A" to "Add Player".
         self.master.bind('<Control-r>', lambda e: self.remove_player())  # Assigns "Ctrl+r" to "Remove Player".
         self.master.bind('<Control-R>', lambda e: self.remove_player())  # Assigns "Ctrl+r" to "Remove Player".
         self.master.bind('<Control-q>', lambda e: self.clear_scores())  # Assigns "Ctrl+q" to "Clear Scores".
         self.master.bind('<Control-Q>', lambda e: self.clear_scores())  # Assigns "Ctrl+Q" to "Clear Scores".
-        self.master.bind('<Right>', lambda e: self.focus_right())
-        self.master.bind('<Left>', lambda e: self.focus_left())
+        self.master.bind('<Right>', lambda e: self.focus_right())  # Use the right arrow to shift focus right.
+        self.master.bind('<Left>', lambda e: self.focus_left())  # Use the left arrow to shift the focus left.
 
         # Add the first player automatically when the window is created.
         self.add_player()
@@ -103,7 +103,8 @@ class Gui(tk.Frame):
             pass
 
     def show_about(self):
-        print("Not implemented yet!")
+        content = "TMF Counter\nVersion: 1.0\nDeveloped by Nick Konstantinidis\nnickonstan@gmail.com"
+        showinfo('About', content, parent=self)
 
     def focus_right(self):
         current_focus = self.focus_get()

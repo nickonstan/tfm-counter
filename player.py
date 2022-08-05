@@ -11,6 +11,8 @@ class Player(tk.Frame):
         self.number = int(name[-1])
         self.name = name
 
+        self.widget_bg = '#d9d9d9'
+
         # tk Variables
         self.name_var = tk.StringVar(value=self.name)
 
@@ -41,7 +43,8 @@ class Player(tk.Frame):
 
         # Widgets
         # Player Name
-        self.name_lbl = tk.Label(self, textvariable=self.name_var, fg=settings.player_colors[self.number - 1],
+        self.name_lbl = tk.Label(self, textvariable=self.name_var,
+                                 fg=settings.player_colors[self.number - 1],
                                  font=settings.title_font)
 
         # Point related widgets
@@ -169,6 +172,8 @@ class PlayerEdit(tk.Toplevel):
                                          height=self.picker_size, relief=tk.GROOVE)
 
         self.create_color_picker(self.picker_size, self.padding_size)
+
+        self.playing_state = tk.IntVar()
 
         # Geometry Management
         self.pl_name_lbl.grid(row=0, column=0, sticky=tk.W)
