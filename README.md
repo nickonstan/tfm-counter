@@ -2,6 +2,8 @@
 Small score tracker for Terraforming Mars games written in Python.
 The GUI uses the built-in Tkinter framework.
 
+![tfm-counter preview](tfm_counter_preview.jpg)
+
 ## Controls
 - You can navigate left/right by using the `left & right arrows`.
 - A player's name and color can be changed by clicking on it ('Player 1-5' by default).
