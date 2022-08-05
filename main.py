@@ -103,7 +103,7 @@ class Gui(tk.Frame):
             pass
 
     def show_about(self):
-        content = "TMF Counter\nVersion: 1.0\nDeveloped by Nick Konstantinidis\nnickonstan@gmail.com"
+        content = "TFM Counter\nVersion: 1.0\nDeveloped by Nick Konstantinidis\nnickonstan@gmail.com"
         showinfo('About', content, parent=self)
 
     def focus_right(self):
