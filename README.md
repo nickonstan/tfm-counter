@@ -1,5 +1,5 @@
 # tfm-counter
-Small score tracker for Terraforming Mars games written in Python.
+Score tracker for Terraforming Mars (physical/digital board game) written in Python.
 The GUI uses the built-in Tkinter framework.
 
 ![tfm-counter preview](tfm_counter_preview.jpg)
